@@ -32,6 +32,8 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'blog.apps.BlogConfig',
+    'videoclips.apps.VideoClipsConfig',
+    'settings.apps.SettingsConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
     'django.contrib.admin',
@@ -134,6 +136,6 @@ MEDIA_URL = '/media/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-LOGIN_REDIRECT_URL = 'blog-home'
+LOGIN_REDIRECT_URL = 'videoclip-home'
 LOGIN_URL = 'login'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

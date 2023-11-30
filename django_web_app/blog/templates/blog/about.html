@@ -1,4 +1,69 @@
-{% extends "blog/base.html" %}
-{% block content %}
-    <h1>About Page</h1>
-{% endblock content %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Video Timeline</title>
+    <style>
+        /* CSS for the timeline */
+        #timeline {
+            width: 80%;
+            margin: 20px auto;
+            border: 1px solid #ccc;
+            position: relative;
+            overflow: hidden;
+            height: 50px;
+        }
+
+        .video-clip {
+            position: absolute;
+            background-color: #3498db;
+            height: 100%;
+            border: 1px solid #2980b9;
+            cursor: pointer;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+<div id="timeline"></div>
+
+<video id="videoPlayer" width="640" height="360" controls>
+    <source src="/media/Videos/1.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+</video>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        // Sample video clips with start times and durations in seconds
+        const videoClips = [
+            { startTime: 0, duration: 5 },
+            { startTime: 8, duration: 7 },
+            { startTime: 18, duration: 10 },
+        ];
+
+        // Function to render video clips on the timeline
+        function renderTimeline() {
+            const timeline = $('#timeline');
+
+            videoClips.forEach((clip) => {
+                const clipElement = $('<div></div>');
+                clipElement.addClass('video-clip');
+                clipElement.css('width', `${clip.duration * 20}px`); // Adjust width based on duration
+                clipElement.css('left', `${clip.startTime * 20}px`); // Adjust left position based on start time
+
+                clipElement.click(() => {
+                    const videoPlayer = $('#videoPlayer')[0];
+                    videoPlayer.currentTime = clip.startTime;
+                    videoPlayer.play();
+                });
+
+                timeline.append(clipElement);
+            });
+        }
+
+        // Render the timeline on document ready
+        renderTimeline();
+    });
+</script>
+</body>
+</html>
